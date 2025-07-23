@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
-import { Pokemon } from 'types/pokemon.type';
 
 import { TypewriterComponent } from '../../typewriter/typewriter.component';
+import { Pokemon } from 'pokeapi-js-wrapper';
 
 @Component({
     selector: 'app-pokemon-info',

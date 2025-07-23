@@ -1,7 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { SimplePokemon } from 'types/simple-pokemon.type';
 
 import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item.component';
+import { PokemonService } from 'services/pokemon.service';
 
 @Component({
     selector: 'app-pokemon-list',
@@ -25,13 +26,26 @@ import { PokemonListItemComponent } from '../pokemon-list-item/pokemon-list-item
                     <app-pokemon-list-item [index]="$index" [pokemon]="pokemon" />
                 }
             </section>
+         
+            
         </div>
-
-        <footer></footer>
+        <footer>
+            <button
+                class="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                (click)="loadMore()"
+            >
+                Load more
+            </button>
+        </footer>
     `,
     styleUrl: './pokemon-list.component.scss',
     imports: [PokemonListItemComponent],
 })
 export class PokemonListComponent {
+    protected readonly pokemonService = inject(PokemonService);
     readonly pokemonList = input<SimplePokemon[]>([]);
+
+    public loadMore(): void {
+        this.pokemonService.nextPage();
+    }
 }
