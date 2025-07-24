@@ -1,5 +1,9 @@
-import { effect, Injectable, resource, signal } from '@angular/core';
+import { effect, inject, Injectable, resource, signal } from '@angular/core';
 import { SimplePokemon } from 'types/simple-pokemon.type';
+import { PokemonAdapterService } from './adapter.service';
+import { Pokemon as PokemonApiResponse } from 'pokeapi-js-wrapper';
+import { Pokemon } from 'types/pokemon.type';
+
 
 export interface PokemonData {
   count: number;
@@ -12,6 +16,7 @@ export interface PokemonData {
   providedIn: 'root'
 })
 export class PokemonService {
+   private readonly adapterService = inject(PokemonAdapterService)
    public readonly offset = signal(0);
    public readonly limit = signal(20);
 
@@ -28,8 +33,6 @@ export class PokemonService {
 
       const json = await response.json()
 
-      console.log(json)
-
       return json;
     }
   });
@@ -43,11 +46,9 @@ export class PokemonService {
         throw new Error(`Failed to fetch Pokemon: ${response.statusText}`);
       }
 
-      const json = await response.json()
+      const json: PokemonApiResponse = await response.json()
 
-      console.log(json)
-
-      return json;
+      return this.adapterService.adaptFromApiResponse(json);
     }
   });
 

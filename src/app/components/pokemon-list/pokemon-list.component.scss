@@ -88,6 +88,7 @@ nav {
 // Main section
 .section-wrapper {
     display: flex;
+    flex-direction: column;
     max-height: calc(100% - 76px);
     flex-grow: 1;
     margin-top: -48px;

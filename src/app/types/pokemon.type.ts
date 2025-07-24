@@ -9,4 +9,23 @@ export interface Pokemon {
     weight: number;
     types: PokemonType[];
     sprites: PokemonSprite;
+    stats: PokemonStat[];
+    abilities: PokemonAbility[];
 }
+
+interface PokemonStat {
+    base_stat: number,
+    stat: {
+        name: string;
+        url: string;
+    }
+}
+
+export interface PokemonAbility {
+    is_hidden: boolean;
+    slot: number;
+    ability: {
+        name: string;
+        url: string;
+    }
+  }

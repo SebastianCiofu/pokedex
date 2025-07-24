@@ -26,16 +26,14 @@ import { PokemonService } from 'services/pokemon.service';
                     <app-pokemon-list-item [index]="$index" [pokemon]="pokemon" />
                 }
             </section>
-         
-            
-        </div>
-        <footer>
             <button
-                class="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                class="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
                 (click)="loadMore()"
             >
                 Load more
             </button>
+        </div>
+        <footer>
         </footer>
     `,
     styleUrl: './pokemon-list.component.scss',
